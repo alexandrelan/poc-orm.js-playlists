@@ -59,7 +59,14 @@
 
   app.post('/playlistChanges', function(req, res) {
 
-    // TODO Validation
+    function validatePlaylist(playlist) {
+      return playlist.title.indexOf('e') === -1;
+    }
+    if (!req.body.every(validatePlaylist)) {
+      res.status(400).send('Le nom d\'une playliste ne peut pas contenir la lettre \'e\'');
+      res.end();
+    }
+      
     session.transaction(function(tx){
       persistenceSync.receiveUpdates(session, tx, entities.Playlist, req.body, function(result) {
         res.send(result);
