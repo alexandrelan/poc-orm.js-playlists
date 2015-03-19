@@ -65,6 +65,7 @@
     if (!req.body.every(validatePlaylist)) {
       res.status(400).send('Le nom d\'une playliste ne peut pas contenir la lettre \'e\'');
       res.end();
+      return;
     }
       
     session.transaction(function(tx){
