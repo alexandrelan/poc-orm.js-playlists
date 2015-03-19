@@ -27,6 +27,14 @@
   entities.Song.hasOne('playlist', entities.Playlist);
   entities.Playlist.hasMany('songs', entities.Song, 'playlist');
 
+  entities.User = persistence.define('User', {
+    login: 'TEXT'
+  });
+  entities.User.hasMany('songs', entities.Song, 'user');
+  entities.Song.hasOne('user', entities.User);
+  entities.User.hasMany('playlists', entities.Playlist, 'user');
+  entities.Playlist.hasOne('user', entities.User);
+  
   var session = persistenceStore.getSession();
   //session.reset();
   session.schemaSync();
