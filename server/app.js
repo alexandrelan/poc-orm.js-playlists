@@ -39,6 +39,21 @@
   //session.reset();
   session.schemaSync();
 
+  var users = [
+    new entities.User({
+      login: 'macadam'
+    }), new entities.User({
+      login: 'paul'
+    })
+  ];
+  
+  users.forEach(function (user) {
+    persistence.add(user);
+  });
+  session.transaction(function (tx) {
+    persistence.flush(tx);
+  });
+  
   app.use(parser.json());
 
   app.use(function (req, res, next) {
