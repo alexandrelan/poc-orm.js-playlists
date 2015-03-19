@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "orm.js": "^0.5.6"
+  }
+}
+
