@@ -9,7 +9,7 @@
     persistenceStore = persistence.StoreConfig.init(persistence, { adaptor: 'mysql' }),
     persistenceSync = persistence.SyncConfig;
 
-  persistenceStore.config(persistence, 'localhost', 3306, 'test_db', 'root', 'root');
+  persistenceStore.config(persistence, 'localhost', 3306, 'poc_ormjs', 'root', '');
   persistenceSync.config(persistence);
 
 
