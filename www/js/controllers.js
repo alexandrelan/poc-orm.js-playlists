@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, Persistence) {
+.controller('AppCtrl', function($http, $rootScope, $scope, $ionicModal, $timeout, Persistence) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -25,11 +25,14 @@ angular.module('starter.controllers', [])
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
+    $http.post('http://localhost:5985/login', $scope.loginData)
+    .success(function (data) {
+      $rootScope.user = {
+        login: $scope.loginData.login,
+        token: data.token
+      };
       $scope.closeLogin();
-    }, 1000);
+    });
   };
 
   // Playlist dialog part
