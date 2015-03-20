@@ -112,7 +112,7 @@ angular.module('starter.controllers', [])
     $scope.closeAddDialog = function() {
       $scope.songData = {};
       $scope.addDialog.hide();
-    },
+    };
 
       // Open the add playlist modal
       $scope.showAddDialog = function() {
