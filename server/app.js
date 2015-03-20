@@ -71,7 +71,29 @@
       next();
     }
   );
-
+  
+  app.post('/login', function (req, res) {
+      
+      entities.User.all(session).filter('login', '=', req.body.login).list(function (users) {
+        console.log(users);
+      if (!users.length) {
+        res.send(401);
+        return;
+      }
+      
+      // Generates, stores and sends a fake token
+      var token = Math.round(100*Math.random());
+      users.filter(function (user) {
+        return user.login === req.body.login;
+      })[0].token = token;
+        // Send fake token
+      res.send({
+        token: token
+      });
+    });
+  });
+    
+  
   app.post('/playlistChanges', function(req, res) {
 
     // TODO Validation
