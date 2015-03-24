@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express": "^4.12.3",
+    "mysql": "^2.5.5",
     "orm.js": "^0.5.6"
   }
 }
