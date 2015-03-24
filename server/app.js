@@ -6,8 +6,8 @@
     parser = require('body-parser'),
     mysql = require('mysql'),
     persistence = require('orm.js'),
-    persistenceStore = persistence.StoreConfig.init(persistence, { adaptor: 'mysql' }),
-    persistenceSync = persistence.SyncConfig;
+    persistenceStore = require('./node_modules/orm.js/lib/persistence.store.config').init(persistence, { adaptor: 'mysql' }),
+    persistenceSync = require('./node_modules/orm.js/lib/persistence.sync.server');
 
   persistenceStore.config(persistence, 'localhost', 3306, 'poc_ormjs', 'root', '');
   persistenceSync.config(persistence);
