@@ -139,20 +139,20 @@
   //exit the process
   function exit() {
     if (session) {
-      session.close();
+      session.transaction(function (tx) {
+        session.reset(tx, function () {
+          console.log('application shutdown process succesfull');
+          session.close();
+          process.exit(0);
+        });
+      });
     }
-
-    logger.log('application shutdown process succesfull');
-    process.exit(0);
   }
 
   // intercept CTRL + C for correct application destruction
   process.on('SIGINT', function () {
-    logger.log('Got SIGINT. quiting application');
+    console.log('Got SIGINT. quiting application');
     exit();
   });
-
-  // app requested exit
-  process.on('exit_app', exit);
-
+  
 }());
